@@ -24,18 +24,6 @@ git clone https://github.com/murschid/innoscripta.git
 cd innoscripta
 ```
 
-<!-- 3. Copy the .env.example file to .env:
-
-```
-cp .env.example .env
-```
-
-4. Then back to base directory by
-
-```
-cd ../
-``` -->
-
 3. Build and start the Docker containers:
 
 ```
@@ -64,7 +52,7 @@ Then, run the following command to migrate the database:
 php artisan migrate
 ```
 
-5. To update news automatically in every hour, execute below command (`maybe it won't work in localhost`)
+5. To update news automatically in every hour, execute below command (`it may not work in localhost!`)
 
 ```
 php artisan insert-news

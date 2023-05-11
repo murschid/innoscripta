@@ -60,8 +60,8 @@ const AuthProvider = ({ children }) => {
 			});
 			if (response.data) {
 				setCurrentUser("");
-				localStorage.removeItem("loginData");
 				setLoginStorageData("");
+				localStorage.removeItem("loginData");
 			}
 		} catch (error) {
 			console.log(error);
