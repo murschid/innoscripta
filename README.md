@@ -105,7 +105,7 @@ php artisan key:generate
 
 php artisan migrate
 
-php artisan schedule:run
+php artisan insert-news
 
 php artisan serve
 ```
