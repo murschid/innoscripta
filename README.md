@@ -39,7 +39,7 @@ cd ../
 3. Build and start the Docker containers:
 
 ```
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 This command will start the following Docker containers:<br>
