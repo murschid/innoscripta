@@ -8,7 +8,7 @@ const Article = ({ articles }) => {
 					return (
 						<Col key={article.id} className="d-flex flex-row flex-wrap">
 							<Card>
-								<Card.Img variant="bottom" height={200} src={article.url_to_image ? article.url_to_image : "https://placehold.co/1280x750"} />
+								<Card.Img variant="bottom" height={200} src={article.url_to_image || "https://placehold.co/1280x750"} />
 								<Card.Body>
 									<Card.Title>{article.title}</Card.Title>
 									<Card.Subtitle className="my-2 text-muted">

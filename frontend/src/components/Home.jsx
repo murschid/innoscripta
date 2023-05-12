@@ -10,7 +10,7 @@ import Loading from "./Loading";
 function Home() {
 	const { loginStorageData } = useAuth();
 	const [searchValue, setSearchValue] = useState("");
-	const [orderBy, setOrderBy] = useState("");
+	const [orderBy, setOrderBy] = useState("desc");
 	const [selectedDate, setSelectedDate] = useState("");
 	const [selectedSources, setSelectedSources] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState([]);

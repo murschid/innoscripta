@@ -99,8 +99,6 @@ class ArticleController extends Controller
         $this->mediaStack();
         $this->theGuardian();
         return redirect('http://127.0.0.1:8080');
-
-        return response()->json(['message' => 'News inserted successfully']);
     }
 
     // This method is for storing data from mediastack news API
@@ -118,10 +116,10 @@ class ArticleController extends Controller
                 $article->api = "Media Stack";
                 $article->author = $news->author ? explode(",", $news->author)[0] : "Unknown";
                 $article->title = $news->title;
-                $article->description = $news->description ? $news->description : "";
+                $article->description = $news->description ? $news->description : "There is no description! Kindly click on below link to read full news.";
                 $article->category = $news->category ? $news->category : "General";
                 $article->url = $news->url;
-                $article->url_to_image = $news->image ? explode(" ", $news->image)[0] : "";
+                $article->url_to_image = $news->image ? explode(" ", $news->image)[0] : "https://placehold.co/1280x750";
                 $article->published_at = $news->published_at;
                 $article->save();
             }
@@ -149,7 +147,7 @@ class ArticleController extends Controller
                 $article->description = $news->description ? $news->description : "";
                 $article->category = "General";
                 $article->url = $news->url;
-                $article->url_to_image = $news->urlToImage ? $news->urlToImage : "";
+                $article->url_to_image = $news->urlToImage ? $news->urlToImage : "https://placehold.co/1280x750";
                 $article->published_at = $news->publishedAt;
                 $article->save();
             }

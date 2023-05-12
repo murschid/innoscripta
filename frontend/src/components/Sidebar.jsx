@@ -33,7 +33,7 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 
 					<h5 className="pt-3">Categories</h5>
 					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Author" onSelect={handleCategory}>
-						<Dropdown.Item eventKey="">No Category</Dropdown.Item>
+						<Dropdown.Item eventKey="">All Categories</Dropdown.Item>
 						{categories &&
 							categories.map((category, index) => {
 								return (
@@ -45,7 +45,7 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 					</DropdownButton>
 					<h5 className="pt-3">Main Sources</h5>
 					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Source" onSelect={handleSourceChange}>
-						<Dropdown.Item eventKey="">No Source</Dropdown.Item>
+						<Dropdown.Item eventKey="">All Sources</Dropdown.Item>
 						{sources &&
 							sources.map((source, index) => {
 								return (

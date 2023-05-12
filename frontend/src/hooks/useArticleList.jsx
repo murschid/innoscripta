@@ -16,7 +16,7 @@ const useArticleList = (url) => {
 			try {
 				const response = await axios.get(url);
 				if (response.data) {
-					setArticles(response.data.articles);
+					setArticles([...response.data.articles]);
 					setLastPage(response.data.lastPage);
 					setPage(response.data.page);
 					setTotal(response.data.total);
