@@ -1,18 +1,16 @@
 import { Alert, Button, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Navigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const { userLogin, errorMessage } = useAuth();
+	const { userLogin, errorMessage, loading } = useAuth();
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		try {
 			await userLogin(email, password);
-			<Navigate to={"/"} />;
 		} catch (error) {
 			console.log(error);
 		}

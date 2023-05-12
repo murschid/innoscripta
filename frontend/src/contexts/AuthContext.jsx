@@ -13,20 +13,18 @@ const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState();
 	const [loginStorageData, setLoginStorageData] = useState("");
 	const [errorMessage, setErrorMessage] = useState();
-	// const [loginError, setLoginError] = useState();
-
-	// const loginStorageData = JSON.parse(localStorage.getItem("loginData"));
 
 	//user registration function
 	const userRegister = async (name, email, password, confirmPassword, agreement) => {
 		const registerData = { name, email, password, password_confirmation: confirmPassword, agreement };
 		try {
+			setLoading(true);
 			const response = await axios.post("http://127.0.0.1:8000/api/register", registerData);
 			if (response.data.status === 200) {
 				setCurrentUser(response.data);
-				localStorage.setItem("loginData", JSON.stringify(response.data));
-				setLoginStorageData(JSON.parse(localStorage.getItem("loginData")));
+				localStorage.setItem("userLoginData", JSON.stringify(response.data));
 			} else {
+				console.log(response);
 				setErrorMessage(response.data.vError);
 			}
 		} catch (error) {
@@ -39,42 +37,40 @@ const AuthProvider = ({ children }) => {
 	const userLogin = async (email, password) => {
 		const loginData = { email, password };
 		try {
+			setLoading(true);
 			const response = await axios.post("http://127.0.0.1:8000/api/login", loginData);
 			if (response.data.status === 200) {
 				setCurrentUser(response.data);
-				localStorage.setItem("loginData", JSON.stringify(response.data));
-				setLoginStorageData(JSON.parse(localStorage.getItem("loginData")));
+				localStorage.setItem("userLoginData", JSON.stringify(response.data));
 			} else {
 				setErrorMessage(response.data.vError);
 			}
 		} catch (error) {
 			console.error(error);
 		}
-	};
-
-	//user logout function
-	const userLogout = async () => {
-		try {
-			const response = await axios.post("http://127.0.0.1:8000/api/logout", null, {
-				headers: { Authorization: `Bearer ${loginStorageData.token}` },
-			});
-			if (response.data) {
-				setCurrentUser("");
-				setLoginStorageData("");
-				localStorage.removeItem("loginData");
-			}
-		} catch (error) {
-			console.log(error);
-		}
 		setLoading(false);
 	};
 
-	useEffect(() => {
-		const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-		setLoginStorageData(userStorageData);
-	}, []);
+	//user logout function
+	const userLogout = () => {
+		setCurrentUser("");
+		localStorage.removeItem("userLoginData");
+		setLoading(false);
 
-	const userData = { loginStorageData, currentUser, userLogin, userRegister, userLogout, errorMessage };
+		// try {
+		// 	await axios.post("http://127.0.0.1:8000/api/logout", null, {
+		// 		headers: { Authorization: `Bearer ${loginStorageData.token}` },
+		// 	});
+		// } catch (error) {
+		// 	console.log(error);
+		// }
+	};
+
+	useEffect(() => {
+		setLoginStorageData(currentUser || JSON.parse(localStorage.getItem("userLoginData")));
+	}, [currentUser]);
+
+	const userData = { currentUser, loginStorageData, userLogin, userRegister, userLogout, errorMessage, loading };
 
 	return <AuthContext.Provider value={userData}>{!loading && children}</AuthContext.Provider>;
 };

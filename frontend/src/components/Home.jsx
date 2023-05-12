@@ -51,7 +51,7 @@ function Home() {
 
 	return (
 		<Container className="mt-2 minHeight">
-			{/* {loading && <Loading />} */}
+			{loading && !searchValue && <Loading />}
 			<Row>
 				<InputGroup className="my-3">
 					<FormControl type="search" placeholder="Search" value={searchValue} onChange={handleSearchChange} />

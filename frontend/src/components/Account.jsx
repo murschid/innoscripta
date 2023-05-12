@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { PersonCircle, BoxArrowRight } from "react-bootstrap-icons";
 
 const Account = () => {
-	const { currentUser, userLogout, loginStorageData } = useAuth();
+	const { loginStorageData, currentUser, userLogout } = useAuth();
 	return (
 		<>
 			{loginStorageData ? (

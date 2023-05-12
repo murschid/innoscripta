@@ -1,5 +1,4 @@
 import { Button, Col, Container, Row, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import useCustomization from "../hooks/useCustomization";
 import React, { useEffect, useState } from "react";
@@ -33,23 +32,17 @@ const UserDashboard = () => {
 		const checkedVal = event.target.value;
 		const nameVal = event.target.name;
 
-		if (checkCategory.includes(checkedVal)) {
-			setCheckCategory(checkCategory.filter((item) => item !== checkedVal));
-		} else setCheckCategory([...checkCategory, checkedVal]);
+		if (checkCategory.includes(checkedVal)) setCheckCategory(checkCategory.filter((item) => item !== checkedVal));
+		else setCheckCategory([...checkCategory, checkedVal]);
 
-		if (checkAuthor.includes(checkedVal)) {
-			setCheckAuthor(checkAuthor.filter((item) => item !== checkedVal));
-		} else setCheckAuthor([...checkAuthor, checkedVal]);
+		if (checkAuthor.includes(checkedVal)) setCheckAuthor(checkAuthor.filter((item) => item !== checkedVal));
+		else setCheckAuthor([...checkAuthor, checkedVal]);
 
-		if (checkSource.includes(checkedVal)) {
-			setCheckSource(checkSource.filter((item) => item !== checkedVal));
-		} else setCheckSource([...checkSource, checkedVal]);
+		if (checkSource.includes(checkedVal)) setCheckSource(checkSource.filter((item) => item !== checkedVal));
+		else setCheckSource([...checkSource, checkedVal]);
 
-		if (event.target.checked) {
-			const response = await axios.post("http://127.0.0.1:8000/api/storeSetting", { user_id: userId, name: checkedVal, type: nameVal });
-		} else {
-			const response = await axios.post("http://127.0.0.1:8000/api/deleteSetting", { user_id: userId, name: checkedVal, type: nameVal });
-		}
+		if (event.target.checked) await axios.post("http://127.0.0.1:8000/api/storeSetting", { user_id: userId, name: checkedVal, type: nameVal });
+		else await axios.post("http://127.0.0.1:8000/api/deleteSetting", { user_id: userId, name: checkedVal, type: nameVal });
 	};
 
 	return (
