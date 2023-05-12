@@ -6,7 +6,7 @@ import axios from "axios";
 import Loading from "./Loading";
 
 const UserDashboard = () => {
-	const { loginStorageData, userLogout, currentUser } = useAuth();
+	const { loginStorageData, userLogout } = useAuth();
 	const { sources, authors, categories } = useCustomization();
 	const [loading, setLoading] = useState(false);
 	const userId = loginStorageData.user.id;

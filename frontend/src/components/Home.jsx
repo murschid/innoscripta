@@ -1,4 +1,5 @@
-import { Dropdown, InputGroup, Row, FormControl, DropdownButton, Container, Button } from "react-bootstrap";
+import { Dropdown, InputGroup, Row, FormControl, DropdownButton, Container, Button, ButtonGroup } from "react-bootstrap";
+import { ArrowLeftSquareFill, ArrowRightSquareFill } from "react-bootstrap-icons";
 import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
 import useArticleList from "../hooks/useArticleList";
@@ -12,7 +13,7 @@ function Home() {
 	const [orderBy, setOrderBy] = useState("");
 	const [selectedSources, setSelectedSources] = useState([]);
 	const [selectedDate, setSelectedDate] = useState("");
-	const [selectedCategory, setSelectedCategory] = useState("");
+	const [selectedCategory, setSelectedCategory] = useState([]);
 	const [pageNo, setPageNo] = useState(1);
 	const [articlesShow, setArticlesShow] = useState([]);
 
@@ -36,8 +37,8 @@ function Home() {
 		setSelectedCategory(value);
 	};
 
-	const handlePageNo = () => {
-		setPageNo(pageNo + 1);
+	const handlePageNo = (event) => {
+		event.target.name === "next" ? setPageNo(pageNo + 1) : setPageNo(pageNo - 1);
 		setArticlesShow(articles);
 	};
 
@@ -55,11 +56,19 @@ function Home() {
 				<Article articles={articlesShow} />
 				<Sidebar selectedSources={handleSources} selectedDate={handleDate} selectedCategory={handleCategory} />
 			</Row>
-			{pageNo !== lastPage && articles.length > 0 && (
+
+			{articles.length > 0 && (
 				<div className="d-flex justify-content-center mt-4">
-					<Button onClick={handlePageNo} variant="primary">
-						Load Next
-					</Button>
+					<ButtonGroup>
+						<Button disabled={pageNo <= 1} onClick={handlePageNo} name="previous" variant="primary" className="me-2">
+							<ArrowLeftSquareFill className="me-2" />
+							Prev
+						</Button>
+						<Button disabled={pageNo >= lastPage} onClick={handlePageNo} name="next" variant="primary">
+							Next
+							<ArrowRightSquareFill className="ms-2" />
+						</Button>
+					</ButtonGroup>
 				</div>
 			)}
 		</Container>
