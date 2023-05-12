@@ -4,7 +4,7 @@ const Article = ({ articles }) => {
 	return (
 		<Col md={10}>
 			<Row xs={1} md={3} className="g-4">
-				{articles.map((article, index) => {
+				{articles.map((article) => {
 					return (
 						<Col key={article.id} className="d-flex flex-row flex-wrap">
 							<Card>

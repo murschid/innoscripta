@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
 	const [loginStorageData, setLoginStorageData] = useState("");
 	const [errorMessage, setErrorMessage] = useState();
 
-	//user registration function
+	// User registration function
 	const userRegister = async (name, email, password, confirmPassword, agreement) => {
 		const registerData = { name, email, password, password_confirmation: confirmPassword, agreement };
 		try {
@@ -27,32 +27,35 @@ const AuthProvider = ({ children }) => {
 				console.log(response);
 				setErrorMessage(response.data.vError);
 			}
+			setLoading(false);
 		} catch (error) {
 			console.error(error);
 		}
-		setLoading(false);
 	};
 
-	//user login function
+	// User login function
 	const userLogin = async (email, password) => {
 		const loginData = { email, password };
 		try {
 			setLoading(true);
 			const response = await axios.post("http://127.0.0.1:8000/api/login", loginData);
+			await new Promise((r) => setTimeout(r, 1000));
 			if (response.data.status === 200) {
 				setCurrentUser(response.data);
 				localStorage.setItem("userLoginData", JSON.stringify(response.data));
 			} else {
 				setErrorMessage(response.data.vError);
 			}
+			setLoading(false);
 		} catch (error) {
 			console.error(error);
 		}
-		setLoading(false);
 	};
 
-	//user logout function
-	const userLogout = () => {
+	// User logout function
+	const userLogout = async () => {
+		setLoading(true);
+		// await new Promise((r) => setTimeout(r, 100));
 		setCurrentUser("");
 		localStorage.removeItem("userLoginData");
 		setLoading(false);

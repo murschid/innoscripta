@@ -11,18 +11,19 @@ function Home() {
 	const { loginStorageData } = useAuth();
 	const [searchValue, setSearchValue] = useState("");
 	const [orderBy, setOrderBy] = useState("");
-	const [selectedSources, setSelectedSources] = useState([]);
 	const [selectedDate, setSelectedDate] = useState("");
+	const [selectedSources, setSelectedSources] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState([]);
 	const [pageNo, setPageNo] = useState(1);
 	const [articlesShow, setArticlesShow] = useState([]);
+	const userId = loginStorageData.user.id;
 
-	const api = `http://127.0.0.1:8000/api/articles?s=${searchValue}&sort=${orderBy}&date=${selectedDate}&category=${selectedCategory}&source=${selectedSources}&page=${pageNo}&user=${loginStorageData.user.id}`;
+	const api = `http://127.0.0.1:8000/api/articles?s=${searchValue}&sort=${orderBy}&date=${selectedDate}&category=${selectedCategory}&source=${selectedSources}&page=${pageNo}&user=${userId}`;
 
 	const { articles, lastPage, loading } = useArticleList(api);
 
 	useEffect(() => {
-		setArticlesShow(articles);
+		setArticlesShow([...articles]);
 	}, [articles]);
 
 	const handleSources = (value) => {
@@ -37,9 +38,20 @@ function Home() {
 		setSelectedCategory(value);
 	};
 
-	const handlePageNo = (event) => {
-		event.target.name === "next" ? setPageNo(pageNo + 1) : setPageNo(pageNo - 1);
-		setArticlesShow(articles);
+	const handlePaginate = (event) => {
+		const status = event.target.name;
+		if (status === "next") {
+			setPageNo(pageNo + 1);
+		} else if (status === "previous") {
+			setPageNo(pageNo - 1);
+		} else if (status === "last") {
+			setPageNo(lastPage);
+		} else if (status === "first") {
+			setPageNo(1);
+		} else {
+			setPageNo(pageNo);
+		}
+		setArticlesShow([...articles]);
 	};
 
 	return (
@@ -57,14 +69,25 @@ function Home() {
 				<Sidebar selectedSources={handleSources} selectedDate={handleDate} selectedCategory={handleCategory} />
 			</Row>
 
+			{/* Funny custom pagination */}
 			{articles.length > 0 && (
 				<div className="d-flex justify-content-center mt-4">
 					<ButtonGroup>
-						<Button disabled={pageNo <= 1} onClick={handlePageNo} name="previous" variant="primary" className="me-2">
+						<Button disabled={pageNo <= 1} onClick={handlePaginate} name="previous" variant="primary" className="me-2">
 							<ArrowLeftSquareFill className="me-2" />
 							Prev
 						</Button>
-						<Button disabled={pageNo >= lastPage} onClick={handlePageNo} name="next" variant="primary">
+						{pageNo > 1 && (
+							<Button onClick={handlePaginate} name="first" variant="primary" className="me-2">
+								1
+							</Button>
+						)}
+						{pageNo < lastPage && (
+							<Button onClick={handlePaginate} name="last" variant="primary" className="me-2">
+								{lastPage}
+							</Button>
+						)}
+						<Button disabled={pageNo >= lastPage} onClick={handlePaginate} name="next" variant="primary">
 							Next
 							<ArrowRightSquareFill className="ms-2" />
 						</Button>

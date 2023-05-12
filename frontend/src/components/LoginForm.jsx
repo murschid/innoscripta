@@ -30,7 +30,7 @@ const LoginForm = () => {
 				</Form.Label>
 				<Form.Control type="password" placeholder="Enter Password" required min={6} onChange={(event) => setPassword(event.target.value)} />
 			</Form.Group>
-			<Button variant="outline-primary" type="submit">
+			<Button variant="outline-primary" type="submit" disabled={loading}>
 				Login
 			</Button>
 		</Form>

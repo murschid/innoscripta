@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 
 const RegisterForm = () => {
@@ -10,7 +10,7 @@ const RegisterForm = () => {
 	const [agreement, setAgreement] = useState(false);
 	// const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
-	const { userRegister, errorMessage } = useAuth();
+	const { userRegister, errorMessage, loading } = useAuth();
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -55,7 +55,7 @@ const RegisterForm = () => {
 			</Form.Group>
 			<Form.Check className="mb-3" name="agreement" label="I agree to the Terms and Conditions *" onChange={(event) => setAgreement(event.target.value)} />
 			{errorMessage && <p className="text-danger">{errorMessage.agreement}</p>}
-			<Button variant="outline-primary" type="submit">
+			<Button variant="outline-primary" type="submit" disabled={loading}>
 				Register
 			</Button>
 		</Form>
