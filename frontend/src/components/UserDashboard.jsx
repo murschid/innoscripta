@@ -3,10 +3,12 @@ import { useAuth } from "../contexts/AuthContext";
 import useCustomization from "../hooks/useCustomization";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "./Loading";
 
 const UserDashboard = () => {
 	const { loginStorageData, userLogout, currentUser } = useAuth();
 	const { sources, authors, categories } = useCustomization();
+	const [loading, setLoading] = useState(false);
 	const userId = loginStorageData.user.id;
 
 	const [checkSource, setCheckSource] = useState([]);
@@ -16,6 +18,7 @@ const UserDashboard = () => {
 	// this hook method brings all user setting data
 	useEffect(() => {
 		(async () => {
+			setLoading(true);
 			try {
 				const response = await axios.get(`http://127.0.0.1:8000/api/checkSetting?user=${userId}`);
 				setCheckSource(response.data.sources.map((item) => item.name));
@@ -24,6 +27,7 @@ const UserDashboard = () => {
 			} catch (error) {
 				console.log(error);
 			}
+			setLoading(false);
 		})();
 	}, [userId]);
 
@@ -47,6 +51,7 @@ const UserDashboard = () => {
 
 	return (
 		<Container className="minHeight mt-3">
+			{loading && <Loading />}
 			<h1>Welcome, {loginStorageData.user.name}!</h1>
 			<hr />
 			<h5>

@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Loading from "./Loading";
 
 function Home() {
-	const { currentUser, loginStorageData } = useAuth();
+	const { loginStorageData } = useAuth();
 	const [searchValue, setSearchValue] = useState("");
 	const [orderBy, setOrderBy] = useState("");
 	const [selectedSources, setSelectedSources] = useState([]);
@@ -23,14 +23,6 @@ function Home() {
 	useEffect(() => {
 		setArticlesShow(articles);
 	}, [articles]);
-
-	const handleSearchChange = (event) => {
-		setSearchValue(event.target.value);
-	};
-
-	const handleOptionSelect = (eventKey) => {
-		setOrderBy(eventKey);
-	};
 
 	const handleSources = (value) => {
 		setSelectedSources(value);
@@ -54,8 +46,8 @@ function Home() {
 			{loading && !searchValue && <Loading />}
 			<Row>
 				<InputGroup className="my-3">
-					<FormControl type="search" placeholder="Search" value={searchValue} onChange={handleSearchChange} />
-					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Order" onSelect={handleOptionSelect}>
+					<FormControl type="search" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Order" onSelect={(eventKey) => setOrderBy(eventKey)}>
 						<Dropdown.Item eventKey="asc">Ascending</Dropdown.Item>
 						<Dropdown.Item eventKey="desc">Descending</Dropdown.Item>
 					</DropdownButton>
