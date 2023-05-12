@@ -66,12 +66,12 @@ const UserDashboard = () => {
 
 				{/* Sources controlling section*/}
 				<Col md={4}>
-					<h4>Sources</h4>
+					<h4>Main Sources</h4>
 					{sources &&
 						sources.map((source, index) => {
 							return (
 								<div key={index}>
-									<Form.Check checked={checkSource.includes(source.source_name)} name="source" label={source.source_name} value={source.source_name} onChange={handleCheckbox} />
+									<Form.Check checked={checkSource.includes(source.api)} name="source" label={source.api} value={source.api} onChange={handleCheckbox} />
 								</div>
 							);
 						})}

@@ -16,12 +16,12 @@ class ArticleController extends Controller
     {
         $query = Article::query();
 
-        $sources = Setting::select("name as sources")->where(['user_id' => $request->input("user"), 'type' => 'source'])->get()->toArray();
+        $sources = Setting::select("name as api")->where(['user_id' => $request->input("user"), 'type' => 'source'])->get()->toArray();
         $authors = Setting::select("name as authors")->where(['user_id' => $request->input("user"), 'type' => 'author'])->get()->toArray();
         $categories = Setting::select("name as categories")->where(['user_id' => $request->input("user"), 'type' => 'category'])->get()->toArray();
 
         if ($request->input("user")) {
-            $query->whereNotIn("source_name", $sources);
+            $query->whereNotIn("api", $sources);
             $query->whereNotIn("category", $categories);
             $query->whereNotIn("author", $authors);
         }
@@ -35,7 +35,7 @@ class ArticleController extends Controller
         }
 
         if ($source = $request->input("source")) {
-            $query->where("source_name", $source);
+            $query->where("api", $source);
         }
 
         if ($category = $request->input("category")) {
@@ -81,7 +81,7 @@ class ArticleController extends Controller
     // This method returns user customization info for user news feed
     public function customizeInfo()
     {
-        $sources = Article::select("source_name")->distinct()->get();
+        $sources = Article::select("api")->distinct()->get();
         $authors = Article::select("author")->distinct()->get();
         $categories = Article::select("category")->distinct()->get();
 
@@ -115,6 +115,7 @@ class ArticleController extends Controller
                 $article = new Article();
                 $article->source_id = $news->source ? $news->source : "Unknown";
                 $article->source_name = $news->source ? $news->source : "Unknown";
+                $article->api = "Media Stack";
                 $article->author = $news->author ? explode(",", $news->author)[0] : "Unknown";
                 $article->title = $news->title;
                 $article->description = $news->description ? $news->description : "";
@@ -142,6 +143,7 @@ class ArticleController extends Controller
                 $article = new Article();
                 $article->source_id = $news->source->id ? $news->source->id : "Unknown";
                 $article->source_name = $news->source->name ? $news->source->name : "Unknown";
+                $article->api = "News API";
                 $article->author = $news->author ? explode(",", $news->author)[0] : "Unknown";
                 $article->title = $news->title;
                 $article->description = $news->description ? $news->description : "";
@@ -169,6 +171,7 @@ class ArticleController extends Controller
                 $article = new Article();
                 $article->source_id = $news->id ? $news->id : "Unknown";
                 $article->source_name = "The Guardian";
+                $article->api = "The Guardian";
                 $article->author = "The Guardian";
                 $article->title = $news->webTitle;
                 $article->description = $news->webTitle;

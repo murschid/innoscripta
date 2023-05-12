@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("source_id")->nullable();
             $table->string("source_name")->nullable();
+            $table->string("api")->nullable();
             $table->string("author")->nullable();
             $table->string("title", 500)->unique();
             $table->string("category")->nullable();

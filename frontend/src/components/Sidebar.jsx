@@ -7,7 +7,6 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 	const [selectDate, setSelectDate] = useState("");
 	const [newsSources, setNewsSources] = useState("");
 	const [categoryData, setCategoryData] = useState("");
-
 	const handleSourceChange = (event) => {
 		setNewsSources(event);
 		selectedSources(event);
@@ -44,14 +43,14 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 								);
 							})}
 					</DropdownButton>
-					<h5 className="pt-3">News Sources</h5>
+					<h5 className="pt-3">Main Sources</h5>
 					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Source" onSelect={handleSourceChange}>
 						<Dropdown.Item eventKey="">No Source</Dropdown.Item>
 						{sources &&
 							sources.map((source, index) => {
 								return (
-									<Dropdown.Item key={index} eventKey={source.source_name}>
-										{source.source_name}
+									<Dropdown.Item key={index} eventKey={source.api}>
+										{source.api}
 									</Dropdown.Item>
 								);
 							})}
