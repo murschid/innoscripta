@@ -62,7 +62,7 @@ php artisan insert-news
 
 -   Open your web browser and go to `http://localhost:8000`. You should see the Laravel welcome page.
 
--   If the `php artisan insert-news` command doesn't work in your machine then execute `http://127.0.0.1:8000/insertNews` from your browser URL. It will insert the news to database from 3 different API and redirect to `http://localhost:8080` (frontend) user login page.
+-   If the `php artisan insert-news` command doesn't work in your local machine then execute `http://127.0.0.1:8000/insert-news` from your browser URL. It will insert the news to database from 3 different API and redirect to `http://localhost:8080` (frontend) user login page.
 
 7. Access the React frontend application:
 

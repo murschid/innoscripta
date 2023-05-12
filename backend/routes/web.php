@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/insertNews', [ArticleController::class, 'insertNews']);
+Route::get('/insert-news', [ArticleController::class, 'insertNews']);
