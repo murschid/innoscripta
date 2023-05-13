@@ -6,9 +6,9 @@ This project is a starter template for running a Laravel, MySQL, and React proje
 
 ### Before you start, make sure you have the following tools installed:
 
--   Docker Engine 20.10.0 or later
+-   Docker Engine 22.0.0 or later
 
--   Docker Compose 1.29.0 or later
+-   Docker Compose 2.0.0 or later
 
 ## Getting Started
 
