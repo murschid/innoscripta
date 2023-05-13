@@ -50,7 +50,7 @@ const UserDashboard = () => {
 	};
 
 	return (
-		<Container className="minHeight mt-3">
+		<Container className="mt-3">
 			{loading && <Loading />}
 			<h1>Welcome, {loginStorageData.user.name}!</h1>
 			<hr />
@@ -102,8 +102,8 @@ const UserDashboard = () => {
 							);
 						})}
 				</Col>
-				<div className="mb-3">
-					<Button className="float-end" onClick={userLogout}>
+				<div className="cmb-5">
+					<Button className="float-start" onClick={userLogout}>
 						Logout
 					</Button>
 				</div>

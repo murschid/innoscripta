@@ -17,17 +17,18 @@ const AuthProvider = ({ children }) => {
 	// User registration function
 	const userRegister = async (name, email, password, confirmPassword, agreement) => {
 		const registerData = { name, email, password, password_confirmation: confirmPassword, agreement };
+		setLoading(true);
 		try {
-			setLoading(true);
 			const response = await axios.post("http://127.0.0.1:8000/api/register", registerData);
 			if (response.data.status === 200) {
 				setCurrentUser(response.data);
 				localStorage.setItem("userLoginData", JSON.stringify(response.data));
+				setLoading(false);
 			} else {
 				console.log(response);
 				setErrorMessage(response.data.vError);
+				setLoading(false);
 			}
-			setLoading(false);
 		} catch (error) {
 			console.error(error);
 		}
@@ -36,8 +37,9 @@ const AuthProvider = ({ children }) => {
 	// User login function
 	const userLogin = async (email, password) => {
 		const loginData = { email, password };
+		setLoading(true);
 		try {
-			setLoading(true);
+			await new Promise((r) => setTimeout(r, 2000));
 			const response = await axios.post("http://127.0.0.1:8000/api/login", loginData);
 			await new Promise((r) => setTimeout(r, 1000));
 			if (response.data.status === 200) {
@@ -46,10 +48,10 @@ const AuthProvider = ({ children }) => {
 			} else {
 				setErrorMessage(response.data.vError);
 			}
-			setLoading(false);
 		} catch (error) {
 			console.error(error);
 		}
+		setLoading(false);
 	};
 
 	// User logout function

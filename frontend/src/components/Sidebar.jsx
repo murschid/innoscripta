@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import useCustomization from "../hooks/useCustomization";
 
 const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
-	const { sources, authors, categories } = useCustomization();
+	const { sources, categories } = useCustomization();
 	const [selectDate, setSelectDate] = useState("");
 	const [newsSources, setNewsSources] = useState("");
 	const [categoryData, setCategoryData] = useState("");
+
 	const handleSourceChange = (event) => {
-		setNewsSources(event);
+		// setNewsSources(event);
 		selectedSources(event);
 	};
 
@@ -18,7 +19,7 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 	};
 
 	const handleCategory = (event) => {
-		setCategoryData(event);
+		// setCategoryData(event);
 		selectedCategory(event);
 	};
 

@@ -71,7 +71,7 @@ function Home() {
 
 			{/* Funny custom pagination */}
 			{articles.length > 0 && (
-				<div className="d-flex justify-content-center mt-4">
+				<div className="d-flex justify-content-center mt-4 cmb-5">
 					<ButtonGroup>
 						<Button disabled={pageNo <= 1} onClick={handlePagination} name="previous" variant="primary" className="me-2">
 							<ArrowLeftSquareFill className="me-2" />

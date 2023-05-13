@@ -1,14 +1,9 @@
-.footer {
-  position: absolute;
-  width: 100%;
+.cmb-5 {
+  margin-bottom: 5rem;
 }
 a {
   text-decoration: none;
 }
-.minHeight {
-  min-height: 87vh;
-}
-
 .spinner {
   position: fixed;
   top: 0;

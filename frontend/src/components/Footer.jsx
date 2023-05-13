@@ -1,10 +1,12 @@
+import { Navbar, Container } from "react-bootstrap";
+
 const Footer = () => {
 	return (
-		<footer className="footer mt-2 py-3 bg-light">
-			<div className="container text-center">
-				<span className="text-muted">Copyright © 2023 Demo Innoscripta. All Rights Reserved</span>
-			</div>
-		</footer>
+		<Navbar fixed="bottom" bg="light" variant="light" className="mt-2 py-3">
+			<Container className="text-center d-block">
+				<span className="text-muted">© 2023 Example Inc. All Rights Reserved</span>
+			</Container>
+		</Navbar>
 	);
 };
 export default Footer;

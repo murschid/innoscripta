@@ -20,13 +20,12 @@ const useArticleList = (url) => {
 					setLastPage(response.data.lastPage);
 					setPage(response.data.page);
 					setTotal(response.data.total);
-					setLoading(false);
 				}
 			} catch (error) {
 				console.error(error);
 				setError(true);
-				setLoading(false);
 			}
+			setLoading(false);
 		})();
 	}, [url]);
 
