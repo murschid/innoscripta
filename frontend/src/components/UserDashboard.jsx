@@ -59,18 +59,18 @@ const UserDashboard = () => {
 				<span className="float-end">Account Created: {new Date(loginStorageData.user.created_at).toLocaleDateString()}</span>
 			</h5>
 			<hr />
-			<Row>
+			<Row className="mb-3">
 				<h2 className="text-center my-3">Customize your news feed from below sections</h2>
-				<h4 className="text-center text-danger mb-4">If you checked any option that means you are not interested to see about that article</h4>
+				<h4 className="text-center text-danger mb-4">[ If you check any option that means you are not interested to see about that article ]</h4>
 				<hr />
 
 				{/* Sources controlling section*/}
-				<Col md={4}>
+				<Col md={2}>
 					<h4>Main Sources</h4>
 					{sources &&
 						sources.map((source, index) => {
 							return (
-								<div key={index}>
+								<div key={index} className="p-1">
 									<Form.Check checked={checkSource.includes(source.api)} name="source" label={source.api} value={source.api} onChange={handleCheckbox} />
 								</div>
 							);
@@ -78,36 +78,39 @@ const UserDashboard = () => {
 				</Col>
 
 				{/* Authors controlling section*/}
-				<Col md={4}>
+				<Col md={7}>
 					<h4>Authors</h4>
-					{authors &&
-						authors.map((author, index) => {
-							return (
-								<div key={index}>
-									<Form.Check checked={checkAuthor.includes(author.author)} name="author" label={author.author} value={author.author} onChange={handleCheckbox} />
-								</div>
-							);
-						})}
+					<div className="d-flex flex-wrap justify-content-center">
+						{authors &&
+							authors.map((author, index) => {
+								return (
+									<div key={index} className="flex-fill p-2">
+										<Form.Check checked={checkAuthor.includes(author.author)} name="author" label={author.author} value={author.author} onChange={handleCheckbox} />
+									</div>
+								);
+							})}
+					</div>
 				</Col>
 
 				{/* Categories controlling section*/}
-				<Col md={4}>
+				<Col md={3}>
 					<h4>Category</h4>
 					{categories &&
 						categories.map((category, index) => {
 							return (
-								<div key={index}>
+								<div key={index} className="p-1">
 									<Form.Check checked={checkCategory.includes(category.category)} name="category" label={category.category} value={category.category} onChange={handleCheckbox} />
 								</div>
 							);
 						})}
 				</Col>
-				<div className="cmb-5">
-					<Button className="float-start" onClick={userLogout}>
-						Logout
-					</Button>
-				</div>
+				<hr />
 			</Row>
+			<div className="cmb-5">
+				<Button className="float-start" onClick={userLogout}>
+					Logout
+				</Button>
+			</div>
 		</Container>
 	);
 };
