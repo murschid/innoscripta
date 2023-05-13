@@ -5,6 +5,7 @@ import { useState } from "react";
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [remember, setRemember] = useState();
 	const { userLogin, errorMessage, loading } = useAuth();
 
 	async function handleSubmit(event) {
@@ -30,6 +31,7 @@ const LoginForm = () => {
 				</Form.Label>
 				<Form.Control type="password" placeholder="Enter Password" required min={6} onChange={(event) => setPassword(event.target.value)} />
 			</Form.Group>
+			<Form.Check className="mb-3" name="remember" label="Remember Me" onChange={(event) => setRemember(event.target.value)} />
 			<Button variant="outline-primary" type="submit" disabled={loading}>
 				Login
 			</Button>

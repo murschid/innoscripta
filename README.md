@@ -52,7 +52,7 @@ Then, run the following command to migrate the database:
 php artisan migrate
 ```
 
-5. To update news automatically in every hour, execute below command (`it may not work in localhost!`)
+5. To update news automatically in every hour, execute below command (`it may not work in local machine!`)
 
 ```
 php artisan insert-news

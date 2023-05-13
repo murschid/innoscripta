@@ -1,28 +1,34 @@
-import { Col, Row, Container, Card } from "react-bootstrap";
+import React from "react";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import LoginForm from "./LoginForm";
 
-function Login() {
+const Login = () => {
 	return (
 		<Container className="minHeight">
-			<Row className="mt-5 d-flex justify-content-center align-items-center">
-				<Col md={8} lg={5} xs={12}>
-					<Card className="shadow">
-						<Card.Body>
-							<h3 className="text-center fw-bold mb-2">User Login</h3>
+			<Row className="mt-5">
+				<Col md={6}>
+					<Image src="bg.svg" alt="bg" className="img-fluid" />
+				</Col>
+				<Col md={6} className="container">
+					<Row className="justify-content-center">
+						<Col md={8}>
+							<div className="mb-4">
+								<h3>User Login</h3>
+							</div>
 							<LoginForm />
-							<p className="mb-0 text-center">
+							<p className="mt-3">
 								{`Don't have an account? `}
 								<NavLink to={"/register"} className={"text-primary fw-bold"}>
 									Register
 								</NavLink>
 							</p>
-						</Card.Body>
-					</Card>
+						</Col>
+					</Row>
 				</Col>
 			</Row>
 		</Container>
 	);
-}
+};
 
 export default Login;

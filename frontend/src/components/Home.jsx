@@ -38,7 +38,7 @@ function Home() {
 		setSelectedCategory(value);
 	};
 
-	const handlePaginate = (event) => {
+	const handlePagination = (event) => {
 		const status = event.target.name;
 		if (status === "next") {
 			setPageNo(pageNo + 1);
@@ -73,21 +73,21 @@ function Home() {
 			{articles.length > 0 && (
 				<div className="d-flex justify-content-center mt-4">
 					<ButtonGroup>
-						<Button disabled={pageNo <= 1} onClick={handlePaginate} name="previous" variant="primary" className="me-2">
+						<Button disabled={pageNo <= 1} onClick={handlePagination} name="previous" variant="primary" className="me-2">
 							<ArrowLeftSquareFill className="me-2" />
 							Prev
 						</Button>
 						{pageNo > 1 && (
-							<Button onClick={handlePaginate} name="first" variant="primary" className="me-2">
+							<Button onClick={handlePagination} name="first" variant="primary" className="me-2">
 								1
 							</Button>
 						)}
 						{pageNo < lastPage && (
-							<Button onClick={handlePaginate} name="last" variant="primary" className="me-2">
+							<Button onClick={handlePagination} name="last" variant="primary" className="me-2">
 								{lastPage}
 							</Button>
 						)}
-						<Button disabled={pageNo >= lastPage} onClick={handlePaginate} name="next" variant="primary">
+						<Button disabled={pageNo >= lastPage} onClick={handlePagination} name="next" variant="primary">
 							Next
 							<ArrowRightSquareFill className="ms-2" />
 						</Button>

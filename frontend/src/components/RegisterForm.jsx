@@ -7,11 +7,10 @@ const RegisterForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [agreement, setAgreement] = useState(false);
+	const [agreement, setAgreement] = useState(true);
 	// const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
 	const { userRegister, errorMessage, loading } = useAuth();
-
 	async function handleSubmit(event) {
 		event.preventDefault();
 		if (password !== confirmPassword) return setError("Password didn't match");
@@ -53,7 +52,7 @@ const RegisterForm = () => {
 				<Form.Control type="password" name="confirmPassword" placeholder="Confirm Password" required min={6} onChange={(event) => setConfirmPassword(event.target.value)} />
 				{errorMessage && <p className="text-danger">{errorMessage.password}</p>}
 			</Form.Group>
-			<Form.Check className="mb-3" name="agreement" label="I agree to the Terms and Conditions *" onChange={(event) => setAgreement(event.target.value)} />
+			<Form.Check className="mb-3" checked={agreement} name="agreement" label="I agree to the Terms and Conditions *" onChange={(event) => setAgreement(event.target.checked)} />
 			{errorMessage && <p className="text-danger">{errorMessage.agreement}</p>}
 			<Button variant="outline-primary" type="submit" disabled={loading}>
 				Register
