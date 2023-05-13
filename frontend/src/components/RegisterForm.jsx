@@ -27,14 +27,14 @@ const RegisterForm = () => {
 				<Form.Label className="text-center">
 					Full Name <span className="text-danger">*</span>
 				</Form.Label>
-				<Form.Control type="text" name="name" placeholder="Enter name" required min={3} value={name} onChange={(event) => setName(event.target.value)} />
+				<Form.Control type="text" name="name" placeholder="Enter Name" required min={3} value={name} onChange={(event) => setName(event.target.value)} />
 				{errorMessage && <p className="text-danger">{errorMessage.name}</p>}
 			</Form.Group>
 			<Form.Group className="mb-3" controlId="formBasicEmail">
 				<Form.Label className="text-center">
 					Email <span className="text-danger">*</span>
 				</Form.Label>
-				<Form.Control type="email" name="email" placeholder="Enter email" required min={9} value={email} onChange={(event) => setEmail(event.target.value)} />
+				<Form.Control type="email" name="email" placeholder="Enter Email" required min={9} value={email} onChange={(event) => setEmail(event.target.value)} />
 				{errorMessage && <p className="text-danger">{errorMessage.email}</p>}
 			</Form.Group>
 			<Form.Group className="mb-3" controlId="formBasicPassword">
