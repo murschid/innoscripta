@@ -5,11 +5,8 @@ import useCustomization from "../hooks/useCustomization";
 const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 	const { sources, categories } = useCustomization();
 	const [selectDate, setSelectDate] = useState("");
-	const [newsSources, setNewsSources] = useState("");
-	const [categoryData, setCategoryData] = useState("");
 
 	const handleSourceChange = (event) => {
-		// setNewsSources(event);
 		selectedSources(event);
 	};
 
@@ -19,7 +16,6 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 	};
 
 	const handleCategory = (event) => {
-		// setCategoryData(event);
 		selectedCategory(event);
 	};
 
