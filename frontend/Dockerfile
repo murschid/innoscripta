@@ -1,6 +1,8 @@
 FROM node:18-alpine
 WORKDIR /app/frontend
-# COPY package*.json .
+ENV PATH /app/frontend/node_modules/.bin:$PATH
+COPY package*.json .
+COPY package-lock.json .
 COPY . .
 RUN npm install
 EXPOSE 8080
