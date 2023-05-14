@@ -55,7 +55,7 @@ class AuthController extends Controller
 
         if ($credentials->fails()) {
             return response()->json([
-                'vError' => $credentials->messages()
+                'lError' => $credentials->messages()
             ]);
         }
 
@@ -66,7 +66,7 @@ class AuthController extends Controller
                 'token' => Auth::user()->createToken('token-name')->plainTextToken
             ]);
         }
-        return response()->json(['vError' => ['email' => ['The provided credentials are incorrect.']]]);
+        return response()->json(['lError' => ['common' => ['The provided credentials are incorrect.']]]);
     }
 
     // User logout method

@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
 				setCurrentUser(response.data);
 				localStorage.setItem("userLoginData", JSON.stringify(response.data));
 			} else {
-				setErrorMessage(response.data.vError);
+				setErrorMessage(response.data.lError);
 			}
 		} catch (error) {
 			console.error(error);
