@@ -27,6 +27,15 @@ cd innoscripta
 3. Build and start the Docker containers:
 
 ```
+docker-compose up -d
+```
+
+4. Sometimes React application shows `npm install` error, so to avoid it use below commands.
+
+```
+cd frontend
+npm install
+cd ../
 docker-compose up --build -d
 ```
 
@@ -37,15 +46,6 @@ This command will start the following Docker containers:<br>
 `mariadb`: the MySQL database server running on port 3306<br>
 
 `frontend`: the React development server running on port 8080<br>
-
-4. Sometimes React application shows `npm install` error, so to avoid it use below commands.
-
-```
-cd frontend
-npm install
-cd ../
-docker-compose up --build -d
-```
 
 5. Migrate the database:
 
