@@ -4,8 +4,9 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN docker-php-ext-install mysqli pdo_mysql
 WORKDIR /app/backend
+COPY composer*.json ./
+RUN composer install
 COPY . .
-# RUN composer install
 EXPOSE 8000
-ENTRYPOINT [ "docker/entrypoint.sh" ]
-# CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
+# ENTRYPOINT ["docker/entrypoint.sh"]
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
