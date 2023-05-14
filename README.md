@@ -38,7 +38,7 @@ This command will start the following Docker containers:<br>
 
 `frontend`: the React development server running on port 8080<br>
 
-4. Sometimes React application shows `npm install` error, so to avoid it use below command one by one.
+4. Sometimes React application shows `npm install` error, so to avoid it use below commands.
 
 ```
 cd frontend
