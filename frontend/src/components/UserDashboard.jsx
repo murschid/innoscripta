@@ -84,7 +84,7 @@ const UserDashboard = () => {
 						{authors &&
 							authors.map((author, index) => {
 								return (
-									<div key={index} className="flex-fill p-2">
+									<div key={index} className="flex-fill p-1">
 										<Form.Check checked={checkAuthor.includes(author.author)} name="author" label={author.author} value={author.author} onChange={handleCheckbox} />
 									</div>
 								);
