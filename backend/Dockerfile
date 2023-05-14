@@ -5,7 +5,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-install mysqli pdo_mysql
 WORKDIR /app/backend
 COPY . .
-COPY .env.example .env .
+COPY .env.example .env
 RUN composer install
 EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
