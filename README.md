@@ -38,6 +38,15 @@ This command will start the following Docker containers:<br>
 
 `frontend`: the React development server running on port 8080<br>
 
+4. Sometimes React application shows `npm install` error, so to avoid it use below command
+
+```
+cd frontend
+npm install
+cd ../
+docker-compose up --build -d
+```
+
 4. Migrate the database:
 
 -   Run the following command to connect to the laravel-app container:
