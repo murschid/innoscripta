@@ -77,7 +77,7 @@ const AuthProvider = ({ children }) => {
 
 	const userData = { currentUser, loginStorageData, userLogin, userRegister, userLogout, errorMessage, loading };
 
-	return <AuthContext.Provider value={userData}>{!loading && children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={userData}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

@@ -2,14 +2,10 @@ import React from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import LoginForm from "./LoginForm";
-import Loading from "./Loading";
-import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
-	const { loading } = useAuth();
 	return (
 		<Container>
-			{loading && <Loading />}
 			<Row className="mt-5">
 				<Col md={6}>
 					<Image src="bg.svg" alt="bg" className="img-fluid" />

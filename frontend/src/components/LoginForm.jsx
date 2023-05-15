@@ -1,6 +1,7 @@
 import { Alert, Button, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
+import Loading from "./Loading";
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
@@ -8,16 +9,17 @@ const LoginForm = () => {
 	const [remember, setRemember] = useState(true);
 	const { userLogin, errorMessage, loading } = useAuth();
 
-	async function handleSubmit(event) {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			await userLogin(email, password);
 		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
 	return (
 		<Form onSubmit={handleSubmit}>
+			{loading && <Loading />}
 			{errorMessage && <Alert variant="danger">{errorMessage.common}</Alert>}
 			<Form.Group className="mb-3" controlId="formBasicEmail">
 				<Form.Label className="text-center">

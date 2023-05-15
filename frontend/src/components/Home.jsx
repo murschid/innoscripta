@@ -59,7 +59,7 @@ function Home() {
 			{loading && !searchValue && <Loading />}
 			<Row>
 				<InputGroup className="my-3">
-					<FormControl type="search" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+					<FormControl type="search" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} className="bg-light" />
 					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Order" onSelect={(eventKey) => setOrderBy(eventKey)}>
 						<Dropdown.Item eventKey="asc">Ascending</Dropdown.Item>
 						<Dropdown.Item eventKey="desc">Descending</Dropdown.Item>
