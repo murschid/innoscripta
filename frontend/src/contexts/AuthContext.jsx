@@ -39,9 +39,7 @@ const AuthProvider = ({ children }) => {
 		const loginData = { email, password };
 		setLoading(true);
 		try {
-			await new Promise((r) => setTimeout(r, 2000));
 			const response = await axios.post("http://127.0.0.1:8000/api/login", loginData);
-			await new Promise((r) => setTimeout(r, 1000));
 			if (response.data.status === 200) {
 				setCurrentUser(response.data);
 				localStorage.setItem("userLoginData", JSON.stringify(response.data));
@@ -56,19 +54,20 @@ const AuthProvider = ({ children }) => {
 
 	// User logout function
 	const userLogout = async () => {
-		setLoading(true);
 		// await new Promise((r) => setTimeout(r, 100));
-		setCurrentUser("");
-		localStorage.removeItem("userLoginData");
+		setLoading(true);
+		try {
+			const response = await axios.post("http://127.0.0.1:8000/api/logout", null, {
+				headers: { Authorization: `Bearer ${loginStorageData.token}` },
+			});
+			if (response.data.status === 200) {
+				setCurrentUser("");
+				localStorage.removeItem("userLoginData");
+			}
+		} catch (error) {
+			console.log(error);
+		}
 		setLoading(false);
-
-		// try {
-		// 	await axios.post("http://127.0.0.1:8000/api/logout", null, {
-		// 		headers: { Authorization: `Bearer ${loginStorageData.token}` },
-		// 	});
-		// } catch (error) {
-		// 	console.log(error);
-		// }
 	};
 
 	useEffect(() => {
