@@ -105,12 +105,12 @@ const UserDashboard = () => {
 						})}
 				</Col>
 				<hr />
+				<div className="mb-5">
+					<Button className="float-start" onClick={userLogout}>
+						Logout
+					</Button>
+				</div>
 			</Row>
-			<div className="cmb-5">
-				<Button className="float-start" onClick={userLogout}>
-					Logout
-				</Button>
-			</div>
 		</Container>
 	);
 };
