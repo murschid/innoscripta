@@ -1,7 +1,6 @@
 import { Alert, Button, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
-import Loading from "./Loading";
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");

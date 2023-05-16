@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
 	// User registration function
 	const userRegister = async (name, email, password, confirmPassword, agreement) => {
 		const registerData = { name, email, password, password_confirmation: confirmPassword, agreement };
+		setErrorMessage("");
 		setLoading(true);
 		try {
 			const response = await axios.post("http://127.0.0.1:8000/api/register", registerData);
@@ -25,7 +26,6 @@ const AuthProvider = ({ children }) => {
 				localStorage.setItem("userLoginData", JSON.stringify(response.data));
 				setLoading(false);
 			} else {
-				console.log(response);
 				setErrorMessage(response.data.vError);
 				setLoading(false);
 			}
@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
 	// User login function
 	const userLogin = async (email, password) => {
 		const loginData = { email, password };
+		setErrorMessage("");
 		setLoading(true);
 		try {
 			const response = await axios.post("http://127.0.0.1:8000/api/login", loginData);
