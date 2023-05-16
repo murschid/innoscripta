@@ -2,11 +2,13 @@ import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { PersonCircle, BoxArrowRight } from "react-bootstrap-icons";
+import Loading from "./Loading";
 
 const Account = () => {
-	const { loginStorageData, userLogout } = useAuth();
+	const { loginStorageData, userLogout, loading } = useAuth();
 	return (
 		<>
+			{loading && <Loading />}
 			{loginStorageData ? (
 				<>
 					<Nav className="ms-auto my-2 my-lg-0" navbarScroll>

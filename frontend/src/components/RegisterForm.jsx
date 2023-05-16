@@ -8,7 +8,6 @@ const RegisterForm = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [agreement, setAgreement] = useState(true);
-	// const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
 	const { userRegister, errorMessage, loading } = useAuth();
 	async function handleSubmit(event) {

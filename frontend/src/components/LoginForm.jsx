@@ -19,7 +19,6 @@ const LoginForm = () => {
 	};
 	return (
 		<Form onSubmit={handleSubmit}>
-			{loading && <Loading />}
 			{errorMessage && <Alert variant="danger">{errorMessage.common}</Alert>}
 			<Form.Group className="mb-3" controlId="formBasicEmail">
 				<Form.Label className="text-center">

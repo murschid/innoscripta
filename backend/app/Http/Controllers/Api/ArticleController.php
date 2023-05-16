@@ -75,7 +75,7 @@ class ArticleController extends Controller
             'sources' => $sources,
             'authors' => $authors,
             "categories" => $categories
-        ]);
+        ], 200);
     }
 
     // This method returns user customization info for user news feed
