@@ -74,8 +74,7 @@ function Home() {
 				<div className="d-flex justify-content-center mt-4 cmb-5">
 					<ButtonGroup>
 						<Button disabled={pageNo <= 1} onClick={handlePagination} name="previous" variant="primary" className="me-2">
-							<ArrowLeftSquareFill className="me-2" />
-							Prev
+							<ArrowLeftSquareFill />
 						</Button>
 						{pageNo > 1 && (
 							<Button onClick={handlePagination} name="first" variant="primary" className="me-2">
@@ -88,8 +87,7 @@ function Home() {
 							</Button>
 						)}
 						<Button disabled={pageNo >= lastPage} onClick={handlePagination} name="next" variant="primary">
-							Next
-							<ArrowRightSquareFill className="ms-2" />
+							<ArrowRightSquareFill />
 						</Button>
 					</ButtonGroup>
 				</div>
