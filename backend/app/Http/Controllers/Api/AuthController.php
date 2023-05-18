@@ -63,10 +63,14 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 200,
                 'user' => Auth::user(),
-                'token' => Auth::user()->createToken('token-name')->plainTextToken
+                'token' => Auth::user()->createToken('userToken')->plainTextToken
             ]);
         }
-        return response()->json(['lError' => ['common' => ['The provided credentials are incorrect.']]]);
+        return response()->json([
+            'lError' => [
+                'common' => 'The provided credentials are incorrect!'
+            ]
+        ]);
     }
 
     // User logout method

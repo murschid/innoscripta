@@ -39,10 +39,10 @@ function Home() {
 	};
 
 	const handlePagination = (event) => {
-		const status = event.target.name;
+		const status = event.target.id;
 		if (status === "next") {
 			setPageNo(pageNo + 1);
-		} else if (status === "previous") {
+		} else if (status === "prev") {
 			setPageNo(pageNo - 1);
 		} else if (status === "last") {
 			setPageNo(lastPage);
@@ -51,7 +51,6 @@ function Home() {
 		} else {
 			setPageNo(pageNo);
 		}
-		setArticlesShow([...articles]);
 	};
 
 	return (
@@ -73,21 +72,21 @@ function Home() {
 			{articles.length > 0 && (
 				<div className="d-flex justify-content-center mt-4 cmb-5">
 					<ButtonGroup>
-						<Button disabled={pageNo <= 1} onClick={handlePagination} name="previous" variant="primary" className="me-2">
-							<ArrowLeftSquareFill />
+						<Button disabled={pageNo <= 1} id="prev" onClick={handlePagination} variant="primary" className="me-2">
+							<ArrowLeftSquareFill /> {` Prev`}
 						</Button>
 						{pageNo > 1 && (
-							<Button onClick={handlePagination} name="first" variant="primary" className="me-2">
+							<Button id="first" onClick={handlePagination} variant="primary" className="me-2">
 								1
 							</Button>
 						)}
 						{pageNo < lastPage && (
-							<Button onClick={handlePagination} name="last" variant="primary" className="me-2">
+							<Button id="last" onClick={handlePagination} variant="primary" className="me-2">
 								{lastPage}
 							</Button>
 						)}
-						<Button disabled={pageNo >= lastPage} onClick={handlePagination} name="next" variant="primary">
-							<ArrowRightSquareFill />
+						<Button disabled={pageNo >= lastPage} id="next" onClick={handlePagination} variant="primary">
+							{`Next `} <ArrowRightSquareFill />
 						</Button>
 					</ButtonGroup>
 				</div>
