@@ -16,17 +16,18 @@ const AuthProvider = ({ children }) => {
 	const [successMessage, setSuccessMessage] = useState("");
 	const [vError, setVError] = useState("");
 
+	// Resetting all error & success messages
 	const resetError = () => {
 		setErrorMessage("");
 		setSuccessMessage("");
 		setSuccessMessage("");
+		setLoading(true);
 	};
 
 	// User registration function
 	const userRegister = async (name, email, password, password_confirmation, agreement) => {
 		const registerData = { name, email, password, password_confirmation, agreement };
 		resetError();
-		setLoading(true);
 		try {
 			const response = await axios.post("http://127.0.0.1:8000/api/register", registerData);
 			setCurrentUser(response.data);
@@ -43,7 +44,6 @@ const AuthProvider = ({ children }) => {
 	const userLogin = async (email, password) => {
 		const loginData = { email, password };
 		resetError();
-		setLoading(true);
 		try {
 			const response = await axios.post("http://127.0.0.1:8000/api/login", loginData);
 			if (response.data.status === 200) {
@@ -81,7 +81,6 @@ const AuthProvider = ({ children }) => {
 	// User password recovery mail sending method
 	const forgotPassword = async (email) => {
 		resetError();
-		setLoading(true);
 		try {
 			const response = await axios.post("http://127.0.0.1:8000/api/forgotPassword", { email });
 			if (response.data.status) {
@@ -99,7 +98,6 @@ const AuthProvider = ({ children }) => {
 	const resetPassword = async (email, token, password, password_confirmation) => {
 		const resetData = { email, token, password, password_confirmation };
 		resetError();
-		setLoading(true);
 		try {
 			const response = await axios.post("http://127.0.0.1:8000/api/resetPassword", resetData);
 			if (response.data.status) {
