@@ -29,7 +29,7 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 					</Form.Group>
 
 					<h5 className="pt-3">Categories</h5>
-					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Author" onSelect={handleCategory}>
+					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Category" onSelect={handleCategory}>
 						<Dropdown.Item eventKey="">All Categories</Dropdown.Item>
 						{categories &&
 							categories.map((category, index) => {
@@ -41,7 +41,7 @@ const Sidebar = ({ selectedSources, selectedDate, selectedCategory }) => {
 							})}
 					</DropdownButton>
 					<h5 className="pt-3">Main Sources</h5>
-					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Source" onSelect={handleSourceChange}>
+					<DropdownButton as={InputGroup.Append} variant="outline-secondary" title="Choose Sources  " onSelect={handleSourceChange}>
 						<Dropdown.Item eventKey="">All Sources</Dropdown.Item>
 						{sources &&
 							sources.map((source, index) => {
