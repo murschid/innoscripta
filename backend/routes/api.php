@@ -15,15 +15,20 @@ use App\Http\Controllers\Api\ArticleController;
 |
 */
 
+// user registration and login Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Password Reset Routes
+Route::post('/forgotPassword', [AuthController::class, 'sendResetLinkEmail']);
+Route::post('/resetPassword', [AuthController::class, 'reset']);
 
 Route::get('/insertNews', [ArticleController::class, 'insertNews']);
 
 Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/checkSetting', [ArticleController::class, 'checkSetting']);
 Route::get('/customizeInfo', [ArticleController::class, 'customizeInfo']);
 
+Route::get('/checkSetting', [ArticleController::class, 'checkSetting']);
 Route::post('/storeSetting', [ArticleController::class, 'storeSetting']);
 Route::post('/deleteSetting', [ArticleController::class, 'deleteSetting']);
 

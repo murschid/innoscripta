@@ -1,13 +1,16 @@
+import { Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
 import Home from "./Home";
 import Menubar from "./Menubar";
-import Login from "./Login";
-import Registration from "./Registration";
-import { Routes, Route } from "react-router-dom";
 import AuthProvider from "../contexts/AuthContext";
 import UserDashboard from "./UserDashboard";
 import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
+import ForgotPasswordForm from "./ForgotPasswordForm";
+import AuthCommon from "./AuthCommon";
+import ResetPasswordForm from "./ResetPasswordForm";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 function App() {
 	return (
@@ -20,8 +23,10 @@ function App() {
 						<Route path="dashboard" element={<UserDashboard />} />
 					</Route>
 					<Route path="/*" element={<PublicRoutes />}>
-						<Route path="login" element={<Login />} />
-						<Route path="register" element={<Registration />} />
+						<Route path="login" element={<AuthCommon children={<LoginForm />} />} />
+						<Route path="register" element={<AuthCommon children={<RegisterForm />} />} />
+						<Route path="forgot-password" element={<AuthCommon children={<ForgotPasswordForm />} />} />
+						<Route path="reset-password" element={<AuthCommon children={<ResetPasswordForm />} />} />
 					</Route>
 				</Routes>
 				<Footer />

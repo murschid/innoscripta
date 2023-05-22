@@ -22,10 +22,7 @@ const Article = ({ articles }) => {
 											<small>Category: {article.category}</small>
 										</p>
 									</Card.Subtitle>
-									<Card.Text>
-										{article.description.substr(0, 100)}
-										<strong> ...more</strong>
-									</Card.Text>
+									<Card.Text>{article.description.substr(0, 100) + ` ...more`}</Card.Text>
 									<Nav.Link href={article.url} target="_blank">
 										Click to read full news from-<strong>{` ${article.source_name}`}</strong>
 									</Nav.Link>

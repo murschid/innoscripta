@@ -51,7 +51,7 @@ class ArticleController extends Controller
         }
 
         $total = $query->count();
-        $perPage = 18;
+        $perPage = 24;
         $page = $request->input('page', 1);
 
         $articles = $query->offset(($page - 1) * $perPage)->limit($perPage)->get();

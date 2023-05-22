@@ -3,39 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     public function index()
     {
-        return response(User::latest()->get());
+        return response()->json(User::latest()->get());
     }
 
     // User registration method
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $validate = Validator::make($request->all(), [
-            'name' => 'required|string|min:3|max:50',
-            'email' => 'required|string|unique:users,email|min:9',
-            'password' => 'required|string|confirmed|min:6',
-            'agreement' => 'required|accepted'
-        ]);
-
-        if ($validate->fails()) {
-            return response()->json([
-                'vError' => $validate->messages()
-            ]);
-        }
-
         $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
         ]);
 
         return response()->json([
@@ -46,30 +37,19 @@ class AuthController extends Controller
     }
 
     // User login method
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = Validator::make($request->all(), [
-            'email' => 'required|email|min:9',
-            'password' => 'required|min:6',
-        ]);
-
-        if ($credentials->fails()) {
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
-                'lError' => $credentials->messages()
+                'errors' => 'The provided credentials are incorrect!'
             ]);
         }
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'status' => 200,
-                'user' => Auth::user(),
-                'token' => Auth::user()->createToken('userToken')->plainTextToken
-            ]);
-        }
+        $user = User::where('email', $request->email)->first();
         return response()->json([
-            'lError' => [
-                'common' => 'The provided credentials are incorrect!'
-            ]
+            'status' => 200,
+            'user' => $user,
+            'token' => $user->createToken('userToken')->plainTextToken
         ]);
     }
 
@@ -77,9 +57,51 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-        return response([
+        return response()->json([
             'status' => 200,
             'message' => 'Logout successful'
-        ], 200);
+        ]);
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|min:9'
+        ]);
+
+        $response = Password::sendResetLink($request->only('email'));
+
+        if ($response === Password::RESET_LINK_SENT) {
+            return response()->json([
+                'status' => __($response)
+            ]);
+        }
+        return response()->json([
+            'errors' =>  ['email' => 'The provided credential is incorrect!']
+        ]);
+    }
+
+    public function reset(ResetPasswordRequest $request)
+    {
+        $response = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+
+            function (User $user, string $password) {
+                $user->forceFill(['password' => bcrypt($password)])->setRememberToken(Str::random(60));
+                $user->save();
+                $user->tokens()->delete();
+                event(new PasswordReset($user));
+            }
+        );
+
+        if ($response === Password::PASSWORD_RESET) {
+            return response()->json([
+                'status' => __($response)
+            ]);
+        }
+
+        return response()->json([
+            'errors' => __($response)
+        ], 500);
     }
 }
