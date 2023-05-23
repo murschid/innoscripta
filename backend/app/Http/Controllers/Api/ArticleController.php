@@ -47,7 +47,7 @@ class ArticleController extends Controller
         }
 
         if ($sort = $request->input('sort')) {
-            $query->orderBy('published_at', $sort);
+            $query->orderBy('id', $sort);
         }
 
         $total = $query->count();
