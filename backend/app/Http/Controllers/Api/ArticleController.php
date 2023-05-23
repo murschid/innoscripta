@@ -170,7 +170,7 @@ class ArticleController extends Controller
                 $article->source_id = $news->id ? $news->id : 'Unknown';
                 $article->source_name = 'The Guardian';
                 $article->api = 'The Guardian';
-                $article->author = 'The Guardian';
+                $article->author = 'Guardian Desk';
                 $article->title = $news->webTitle;
                 $article->description = $news->webTitle;
                 $article->category = $news->sectionName;
