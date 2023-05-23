@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    // All users retrieving method
     public function index()
     {
         return response()->json(User::latest()->get());
@@ -63,6 +64,7 @@ class AuthController extends Controller
         ]);
     }
 
+    // Forgot password email link sending method
     public function sendResetLinkEmail(Request $request)
     {
         $request->validate([
@@ -81,6 +83,7 @@ class AuthController extends Controller
         ]);
     }
 
+    // User password resetting method 
     public function reset(ResetPasswordRequest $request)
     {
         $response = Password::reset(
